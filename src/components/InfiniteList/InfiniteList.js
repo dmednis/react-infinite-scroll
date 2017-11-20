@@ -20,6 +20,7 @@ export default class InfiniteList extends Component {
     bottomThreshold: 3,
   };
 
+
   constructor() {
     super();
 
@@ -109,7 +110,7 @@ export default class InfiniteList extends Component {
       rows: rows.slice(count),
       heightStack: [...heightStack, ...newHeightStack],
       topBuffer: topBuffer + removableHeight,
-      scrollRestorePosition: this.container.scrollTop + 30,
+      scrollRestorePosition: this.container.scrollTop + 10,
     });
   }
 
@@ -139,8 +140,8 @@ export default class InfiniteList extends Component {
 
   handleScroll({ target }) {
     const { clientHeight, scrollTop } = target;
-    const { topBuffer, lastScrollPosition, topOffset } = this.state;
-    const { topThreshold, bottomThreshold } = this.props;
+    const { topBuffer, lastScrollPosition, topOffset, rows } = this.state;
+    const { topThreshold, bottomThreshold, maxItemsThreshold } = this.props;
     const elements = Array.from(this.container.children).slice(1);
 
     let topInvisibleElementsHeight = 0;
@@ -166,16 +167,16 @@ export default class InfiniteList extends Component {
 
     if (lastScrollPosition > scrollTop) {
       // SCROLL UP
-      if (bottomInvisibleElementsCount > bottomThreshold) {
-        this.removeBottomItems(bottomThreshold);
+      if (rows.length > maxItemsThreshold) {
+        this.removeBottomItems(rows.length - maxItemsThreshold);
       }
       if (topInvisibleElementsCount < topThreshold && topOffset > 0) {
         this.addTopItems(topThreshold);
       }
     } else {
       // SCROLL DOWN
-      if (topInvisibleElementsCount > topThreshold) {
-        this.removeTopItems(topThreshold);
+      if (rows.length > maxItemsThreshold) {
+        this.removeTopItems(rows.length - maxItemsThreshold);
       }
       if (bottomInvisibleElementsCount < bottomThreshold) {
         this.addBottomItems(bottomThreshold);
