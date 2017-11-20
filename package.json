@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "faker": "^4.1.0",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-fontawesome": "^1.6.1",
     "react-scripts": "1.0.17"
   },
   "scripts": {

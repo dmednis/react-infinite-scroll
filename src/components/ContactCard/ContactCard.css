@@ -1,0 +1,25 @@
+.contact-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    justify-content: center;
+    text-align: left;
+    padding: 10px 0;
+}
+
+.contact-avatar {
+    flex-direction: row;
+    height: 100%;
+    width: auto;
+}
+
+.contact-info {
+    flex-direction: row;
+    flex: 0 0 70%;
+    padding-left: 10px;
+}
+
+.contact-info dt {
+    font-weight: bold;
+}
