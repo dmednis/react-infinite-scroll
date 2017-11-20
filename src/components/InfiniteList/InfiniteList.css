@@ -1,5 +1,5 @@
 .infinite-list-container {
     overflow-y: scroll;
-    height: 700px;
+    height: 100%;
     border-bottom: 3px solid #dc3b43;
 }

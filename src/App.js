@@ -14,6 +14,7 @@ export default class App extends Component {
     this.itemCount = 100;
     this.state = {
       contacts: [],
+      contentHeight: 0,
     };
   }
 
@@ -30,11 +31,19 @@ export default class App extends Component {
       });
     }
     this.setState({ contacts });
+
+    window.addEventListener('resize', (e) => {this.handleResize()});
+    this.handleResize();
+  }
+
+  handleResize() {
+    console.log(window.innerHeight);
+    this.setState({contentHeight: window.innerHeight - 153})
   }
 
   render() {
 
-    const { contacts } = this.state;
+    const { contacts, contentHeight } = this.state;
 
     return (
       <div className="App">
@@ -42,7 +51,7 @@ export default class App extends Component {
           <FontAwesome className="App-logo" name='users' size='5x'/>
           <h1 className="App-title">Contacts</h1>
         </header>
-        <div className="App-content">
+        <div className="App-content" style={{height: contentHeight}}>
           <InfiniteList rowComponent={ContactCard} data={contacts}/>
         </div>
       </div>
