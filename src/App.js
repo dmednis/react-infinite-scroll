@@ -42,7 +42,7 @@ export default class App extends Component {
           <FontAwesome className="App-logo" name='users' size='5x'/>
           <h1 className="App-title">Contacts</h1>
         </header>
-        <div>
+        <div className="App-content">
           <InfiniteList rowComponent={ContactCard} data={contacts}/>
         </div>
       </div>
