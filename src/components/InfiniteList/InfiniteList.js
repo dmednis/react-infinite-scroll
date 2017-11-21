@@ -3,6 +3,15 @@ import PropTypes from 'prop-types';
 
 import './InfiniteList.css';
 
+/**
+ * InfiniteList
+ *
+ * A stateful React component that provides bi-directional infinite scrolling functionality for a list of elements.
+ * Requires a list row component (rowComponent) and a data array (data) as props.
+ * For each element of the data array a rowComponent is rendered in the list with the array element passed to the rowComponent as data prop.
+ * Allows for configuration of max allowed items (maxItemsThreshold) in the list and top (topThreshold)
+ * and bottom (bottomThreshold) thresholds for when to add more items at each end.
+ */
 export default class InfiniteList extends Component {
 
   static propTypes = {
@@ -38,14 +47,12 @@ export default class InfiniteList extends Component {
 
   componentDidMount() {
     const { maxItemsThreshold, data } = this.props;
-
     this.setState({ bottomOffset: maxItemsThreshold, rows: data.slice(0, maxItemsThreshold) });
   }
 
 
   componentWillReceiveProps(nextProps) {
     const { maxItemsThreshold, data } = nextProps;
-
     this.setState({ rows: data.slice(0, maxItemsThreshold) });
   }
 
