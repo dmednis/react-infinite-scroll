@@ -11,7 +11,7 @@ export default class App extends Component {
 
   constructor() {
     super();
-    this.itemCount = 100;
+    this.itemCount = 1000;
     this.state = {
       contacts: [],
       contentHeight: 0,
@@ -32,12 +32,15 @@ export default class App extends Component {
     }
     this.setState({ contacts });
 
-    window.addEventListener('resize', (e) => {this.handleResize()});
+    window.addEventListener('resize', () => {this.handleResize()});
     this.handleResize();
   }
 
+  componentWillUnmount(){
+    window.removeEventListener('resize', () => {this.handleResize()});
+  }
+
   handleResize() {
-    console.log(window.innerHeight);
     this.setState({contentHeight: window.innerHeight - 153})
   }
 

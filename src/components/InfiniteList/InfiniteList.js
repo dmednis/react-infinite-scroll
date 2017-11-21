@@ -37,12 +37,11 @@ export default class InfiniteList extends Component {
 
 
   componentDidMount() {
-    const { maxItemsThreshold } = this.props;
+    const { maxItemsThreshold, data } = this.props;
 
-    this.setState({ bottomOffset: maxItemsThreshold });
-
-    this.container.addEventListener('scroll', this.handleScroll.bind(this));
+    this.setState({ bottomOffset: maxItemsThreshold, rows: data.slice(0, maxItemsThreshold) });
   }
+
 
   componentWillReceiveProps(nextProps) {
     const { maxItemsThreshold, data } = nextProps;
@@ -151,7 +150,6 @@ export default class InfiniteList extends Component {
 
     for (let i = 0; i < elements.length; i++) {
       const height = elements[i].getBoundingClientRect().height;
-
       if (scrollTop - topBuffer > topInvisibleElementsHeight + height) {
         topInvisibleElementsHeight += height;
         topInvisibleElementsCount++;
@@ -198,7 +196,7 @@ export default class InfiniteList extends Component {
     });
 
     return (
-      <div ref={(container) => {
+      <div onScroll={(e) => this.handleScroll(e)} ref={(container) => {
         this.container = container
       }} className="infinite-list-container">
         <div className="top-buffer" style={{ height: topBuffer }}/>
